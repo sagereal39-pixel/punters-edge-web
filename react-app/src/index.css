@@ -1,0 +1,286 @@
+/* Card Style */
+
+/* .card {
+  border: 1px solid hsl(0, 0%, 80%);
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.1);
+  padding: 20px;
+  margin: 10px;
+  text-align: center;
+  max-width: 250px;
+  display: inline-block;
+}
+
+.card .card-image {
+  max-width: 60%;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.card .card-title {
+  font-family: cursive, Arial, Helvetica, sans-serif;
+  margin: 0;
+  color: hsl(0, 0%, 20%);
+}
+
+.card .card-text {
+  font-family: cursive, Arial, Helvetica, sans-serif;
+  color: hsl(0, 0%, 30%);
+}
+
+.counter-container {
+  text-align: center;
+  font-family: cursive;
+}
+
+.count-display {
+  font-size: 10em;
+  margin-top: 0;
+  margin-bottom: 50px;
+}
+
+.counter-button {
+  width: 150px;
+  height: 50px;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0px 5px;
+  background-color: hsla(180, 100%, 25%, 0.603);
+  color: wheat;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.counter-button:hover {
+  background-color: hsla(180, 100%, 25%, 0.503);
+} */
+
+/* body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.color-picker-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  margin: 50px;
+  font-size: 3rem;
+}
+
+.color-display {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 5px solid lightgray;
+  border-radius: 25px;
+  margin-bottom: 25px;
+  transition: 0.25s ease;
+}
+
+.color-display p {
+  color: hsl(0, 0%, 30%);
+  font-size: 2rem;
+  text-align: center;
+}
+
+label {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+input[type = 'color'] {
+  width: 75px;
+  height: 50px;
+  padding: 5px;
+  border-radius: 10px;
+  border: 3px solid rgb(53, 238, 238);
+} */
+
+/* body {
+  background-color: darkgray;
+}
+
+.to-do-list {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  margin-top: 100px;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+button {
+  font-size: 1.7rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+
+.add-button {
+  background-color: rgb(107, 224, 107);
+}
+
+.add-button:hover {
+  background-color: rgb(77, 194, 77);
+}
+
+.delete {
+  background-color: rgb(221, 55, 64);
+}
+
+.delete:hover {
+  background-color: rgb(191, 25, 44);
+}
+
+.move-up {
+  background-color: rgb(75, 56, 247);
+}
+
+.move-up:hover {
+  background-color: rgb(55, 36, 227);
+}
+
+input[type='text'] {
+  font-size: 1.5rem;
+  padding: 10px;
+  border: 2px solid gray;
+  border-radius: 7px;
+  color: rgb(129, 127, 127);
+}
+
+ol {
+  padding: 0;
+}
+
+li {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 10px;
+  border: 2px solid rgb(145, 133, 133);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.text {
+  flex: 1;
+}
+
+.delete,
+.move-up {
+  padding: 8px 12px;
+  font-size: 1.5rem;
+  margin-left: 10px;
+} */
+
+/* body {
+  background-image: url(assets/boots.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  margin: 0;
+}
+
+.clock-container {
+  backdrop-filter: blur(6px);
+  width: 100vw;
+  padding: 10px 0;
+}
+
+.clock {
+  color: white;
+  font-size: 6rem;
+  font-weight: bold;
+  font-family: monospace, cursive;
+  text-shadow: 3px 3px 5px darkgray;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  align-items: center;
+} */
+
+/* body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: lightgoldenrodyellow;
+}
+
+.stopwatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 5px solid;
+  border-radius: 50px;
+  background-color: white;
+  padding: 30px;
+}
+
+.display {
+  font-size: 5rem;
+  font-family: cursive;
+  font-weight: bold;
+  color: lightgray;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.75);
+  margin-bottom: 25px;
+}
+
+.controls button {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  margin: 5px;
+  min-width: 125px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.5s ease;
+}
+
+.start {
+  background-color: hsl(120, 85%, 64%);
+}
+.start:hover {
+  background-color: hsl(100, 65%, 44%);
+}
+.stop {
+  background-color: hsl(7, 93%, 48%);
+}
+.stop:hover {
+  background-color: hsl(7, 73%, 54%);
+}
+.reset {
+  background-color: hsl(244, 90%, 51%);
+}
+.reset:hover {
+  background-color: hsl(220, 70%, 34%);
+} */
+
+/* body {
+  font-family: cursive;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  margin: 0%;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('assets/boots.jpg');
+} */
