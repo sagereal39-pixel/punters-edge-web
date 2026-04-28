@@ -120,7 +120,9 @@ function AdminPage() {
 
   const fetchExistingMatches = async () => {
     try {
-      const res = await fetch('http://localhost:5001/fetch_matches.php');
+      const res = await fetch(
+        'https://punters-edge-web-production.up.railway.app/fetch_matches.php',
+      );
       const data = await res.json();
       setExistingMatches(data);
     } catch (error) {
@@ -154,9 +156,12 @@ function AdminPage() {
   const handleDelete = async (id) => {
     if (window.confirm('Delete this prediction forever?')) {
       try {
-        const res = await fetch(`http://localhost:5001/api.php?id=${id}`, {
-          method: 'DELETE',
-        });
+        const res = await fetch(
+          `https://punters-edge-web-production.up.railway.app/api.php?id=${id}`,
+          {
+            method: 'DELETE',
+          },
+        );
         const result = await res.json();
         if (result.status === 'success') {
           fetchExistingMatches();
@@ -172,7 +177,7 @@ function AdminPage() {
 
     try {
       const response = await fetch(
-        `http://localhost:5001/fetch_api_data.php?date=${formData.date}`,
+        `https://punters-edge-web-production.up.railway.app/fetch_api_data.php?date=${formData.date}`,
       );
 
       const result = await response.json();
@@ -260,11 +265,14 @@ function AdminPage() {
     const payload = editingId ? { ...formData, id: editingId } : formData;
 
     try {
-      const response = await fetch('http://localhost:5001/api.php', {
-        method: method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
+      const response = await fetch(
+        'https://punters-edge-web-production.up.railway.app/api.php',
+        {
+          method: method,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        },
+      );
 
       const rawText = await response.text();
       console.log('Raw Response from Server:', rawText);

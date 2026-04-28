@@ -44,9 +44,8 @@ function App() {
     const fetchMatches = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5001/fetch_api_data.php?date=${selectedDate}`,
+          `https://punters-edge-web-production.up.railway.app/fetch_matches.php?date=${selectedDate}`,
         );
-
         const data = await res.json();
 
         if (data.status === 'success') {
