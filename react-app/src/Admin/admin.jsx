@@ -121,7 +121,7 @@ function AdminPage() {
   const fetchExistingMatches = async () => {
     try {
       const res = await fetch(
-        'https://punters-edge-web-production.up.railway.app/fetch_matches.php',
+        'https://punters-edge-web.onrender.com/index.php',
       );
       const data = await res.json();
       setExistingMatches(data);
@@ -157,7 +157,7 @@ function AdminPage() {
     if (window.confirm('Delete this prediction forever?')) {
       try {
         const res = await fetch(
-          `https://punters-edge-web-production.up.railway.app/api.php?id=${id}`,
+          `https://punters-edge-web.onrender.com/api.php?id=${id}`,
           {
             method: 'DELETE',
           },
@@ -177,7 +177,7 @@ function AdminPage() {
 
     try {
       const response = await fetch(
-        `https://punters-edge-web-production.up.railway.app/fetch_api_data.php?date=${formData.date}`,
+        `https://punters-edge-web.onrender.com/fetch_api_data.php?date=${formData.date}`,
       );
 
       const result = await response.json();
@@ -266,7 +266,7 @@ function AdminPage() {
 
     try {
       const response = await fetch(
-        'https://punters-edge-web-production.up.railway.app/api.php',
+        'https://punters-edge-web.onrender.com/api.php',
         {
           method: method,
           headers: { 'Content-Type': 'application/json' },

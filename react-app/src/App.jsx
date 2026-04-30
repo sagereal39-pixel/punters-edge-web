@@ -44,7 +44,7 @@ function App() {
     const fetchMatches = async () => {
       try {
         const res = await fetch(
-          `https://punters-edge-web-production.up.railway.app/fetch_matches.php?date=${selectedDate}`,
+          `https://punters-edge-web.onrender.com/index.php?date=${selectedDate}`,
         );
         const data = await res.json();
 
@@ -67,7 +67,7 @@ function App() {
     const fetchFixtures = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5001/fetch_api_data.php?date=${selectedDate}`,
+          `https://punters-edge-web.onrender.com/fetch_api_data.php?date=${selectedDate}`,
         );
         const data = await res.json();
         setFixtures(data.status === 'success' ? data.matches : []);
@@ -83,7 +83,9 @@ function App() {
   useEffect(() => {
     const fetchPredictions = async () => {
       try {
-        const res = await fetch('http://localhost:5001/fetch_matches.php');
+        const res = await fetch(
+          'https://punters-edge-web.onrender.com/index.php',
+        );
         const data = await res.json();
         setPredictions(Array.isArray(data) ? data : []);
       } catch (error) {
