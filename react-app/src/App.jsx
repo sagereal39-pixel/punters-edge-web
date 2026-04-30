@@ -32,6 +32,9 @@ function App() {
     document.title = "Punter's Edge";
   }, []);
 
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    localStorage.getItem('isAdminAuthenticated') === 'true',
+  );
   const [matches, setMatches] = useState([]);
   const [fixtures, setFixtures] = useState([]);
   const [predictions, setPredictions] = useState([]);
