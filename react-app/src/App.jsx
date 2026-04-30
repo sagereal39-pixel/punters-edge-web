@@ -98,10 +98,16 @@ function App() {
   }, []);
 
   const filteredMatches = predictions.filter((match) => {
-    const matchesDate = match.match_date === selectedDate;
-    const matchesLeague =
-      activeLeague === 'All' || match.league_category === activeLeague;
+    // Use match_date if it exists, otherwise fall back to date
+    const matchDateValue = match.match_date || match.date;
+    const matchesDate = matchDateValue === selectedDate;
 
+    // Use league_category if it exists, otherwise fall back to leagueCategory
+    const matchLeagueValue = match.league_category || match.leagueCategory;
+    const matchesLeague =
+      activeLeague === 'All' || matchLeagueValue === activeLeague;
+
+    // Ensure numeric check for is_bet_of_the_day
     const isBetOfDay =
       activeLeague === 'Bet of the Day' ? match.is_bet_of_the_day == 1 : true;
 
