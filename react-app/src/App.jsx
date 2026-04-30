@@ -14,6 +14,7 @@ import AdminPage from './Admin/admin.jsx';
 import HistoryPage from './Admin/historypage.jsx';
 // 1. ADD THIS IMPORT BELOW
 import AdminLogin from './Admin/adminlogin.jsx';
+import { useLocation } from 'react-router-dom';
 
 const leagues = [
   'Bet of the Day',
@@ -43,6 +44,9 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
     localStorage.getItem('isAdminAuthenticated') === 'true',
   );
+
+  const location = useLocation();
+  const isAdminPath = location.pathname === '/admin';
 
   const [matches, setMatches] = useState([]);
   const [fixtures, setFixtures] = useState([]);
@@ -117,6 +121,22 @@ function App() {
   return (
     <Router>
       <div className='app-shell'>
+        {/* ONLY show the topbar if NOT on admin path */}
+        {!isAdminPath && (
+          <header className='topbar'>
+            <Link to='/' className='brand-link'>
+              <div className='brand'>⚽ PUNTER'S EDGE</div>
+            </Link>
+            <nav className='topnav'>
+              <Link to='/' className='topnav-link'>
+                Home
+              </Link>
+              <Link to='/history' className='topnav-link'>
+                History
+              </Link>
+            </nav>
+          </header>
+        )}
         <header className='topbar'>
           <Link to='/' className='brand-link'>
             <div className='brand'>⚽ PUNTER&apos;S EDGE</div>
@@ -131,6 +151,20 @@ function App() {
         </header>
 
         <main className='page-container'>
+          {/* ONLY show league scroll if NOT on admin path */}
+          {!isAdminPath && (
+            <div className='league-scroll'>
+              {leagues.map((league) => (
+                <button
+                  key={league}
+                  onClick={() => setActiveLeague(league)}
+                  className='league-btn'
+                >
+                  {league}
+                </button>
+              ))}
+            </div>
+          )}
           <div className='league-scroll'>
             {leagues.map((league) => (
               <button
@@ -161,6 +195,17 @@ function App() {
                     </div>
                   </div>
                 </>
+              }
+            />
+
+            <Route
+              path='/admin'
+              element={
+                isAuthenticated ? (
+                  <AdminPage />
+                ) : (
+                  <AdminLogin setAuth={setIsAuthenticated} />
+                )
               }
             />
 

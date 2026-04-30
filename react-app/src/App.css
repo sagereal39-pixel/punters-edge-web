@@ -1020,3 +1020,55 @@ textarea {
     grid-template-columns: 1fr;
   }
 }
+
+/* Full-screen background for the landing page */
+.admin-login-landing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #0f0f0f; /* Dark background like your blog */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+/* The white/dark box in the center */
+.login-box {
+  background: #1a1a1a;
+  padding: 40px;
+  border-radius: 12px;
+  border: 1px solid #00ff88; /* Green border for Punter's Edge */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.login-box h2 {
+  color: #00ff88;
+  margin-bottom: 25px;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  background: #333;
+  border: 1px solid #444;
+  color: white;
+  border-radius: 6px;
+}
+
+.login-box button {
+  width: 100%;
+  padding: 12px;
+  background: #00ff88;
+  color: black;
+  border: none;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
