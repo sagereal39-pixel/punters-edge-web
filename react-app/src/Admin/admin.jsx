@@ -327,7 +327,7 @@ function AdminPage() {
 
   return (
     <div className='admin-layout'>
-      // Place this at the very start of your return() block
+       {/* Place this at the very start of your return block */}
       <div
         className='admin-top-bar'
         style={{
