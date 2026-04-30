@@ -1,13 +1,17 @@
 import MatchCard from './matchcard.jsx';
 
 function MatchList({ matches }) {
+  // Check if matches is undefined or null first
+  if (!matches) {
+    return <div className='empty-state'>Loading matches...</div>;
+  }
+
   return (
     <div className='match-grid'>
-      {matches && matches.length > 0 ? (
+      {matches.length > 0 ? (
         matches.map((match) => (
-          <div key={match.id}>
-            <MatchCard match={match} />
-          </div>
+          /* Removed the extra wrapping div for a cleaner DOM */
+          <MatchCard key={match.id} match={match} />
         ))
       ) : (
         <div className='empty-state'>No matches found for this date.</div>

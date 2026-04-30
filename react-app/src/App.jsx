@@ -164,7 +164,7 @@ function App() {
             ))}
           </div>
         )}
-        <div className='league-scroll'>
+        {/* <div className='league-scroll'>
           {leagues.map((league) => (
             <button
               key={league}
@@ -174,7 +174,7 @@ function App() {
               {league}
             </button>
           ))}
-        </div>
+        </div> */}
 
         <Routes>
           <Route
