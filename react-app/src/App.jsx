@@ -123,9 +123,6 @@ function App() {
           </Link>
 
           <nav className='topnav'>
-            <Link to='/' className='topnav-link'>
-              Home
-            </Link>
             <Link to='/history' className='topnav-link'>
               History
             </Link>
