@@ -7,7 +7,9 @@ const HistoryPage = () => {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const res = await fetch('http://localhost:5001/fetch_matches.php');
+        const res = await fetch(
+          'https://punters-edge-web.onrender.com/index.php',
+        );
         const data = await res.json();
         setHistory(data.filter((m) => m.status !== 'pending'));
       } catch (err) {
