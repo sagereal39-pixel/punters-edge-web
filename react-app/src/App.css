@@ -1033,7 +1033,6 @@ textarea {
   width: 100%;
   z-index: 9999;
   overflow: hidden;
-  background-color: #000; /* Fallback */
 }
 
 /* This handles the background image separately */
