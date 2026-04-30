@@ -327,25 +327,32 @@ function AdminPage() {
 
   return (
     <div className='admin-layout'>
-      <div className='admin-nav-header' style={{ marginBottom: '20px' }}>
-        <button
-          onClick={() => navigate('/')}
-          className='admin-secondary-btn'
-          style={{ marginRight: '10px' }}
-        >
+      // Place this at the very start of your return() block
+      <div
+        className='admin-top-bar'
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          padding: '15px',
+          background: '#1a1a1a',
+          borderRadius: '8px',
+          marginBottom: '20px',
+          border: '1px solid #333',
+        }}
+      >
+        <button onClick={() => navigate('/')} className='admin-secondary-btn'>
           🏠 Back to Home
         </button>
         <button
           onClick={() => {
             localStorage.removeItem('isAdminAuthenticated');
-            window.location.reload();
+            window.location.href = '/admin'; // Force refresh to clear state
           }}
           className='admin-delete-btn'
         >
           Logout
         </button>
       </div>
-
       <div className='admin-list-card'>
         <h3 className='admin-panel-title'>
           📋 {showHistory ? 'TIPS HISTORY' : 'ACTIVE PREDICTIONS'}
@@ -410,7 +417,6 @@ function AdminPage() {
           ))}
         </div>
       </div>
-
       <div className='admin-form-wrap'>
         <h2 className='admin-form-title'>
           {editingId ? '✏️ EDIT PREDICTION' : '🛡️ ADMIN: ADD PREDICTION'}
