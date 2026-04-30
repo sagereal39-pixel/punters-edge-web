@@ -9,7 +9,7 @@ function AdminLogin({ setAuth }) {
     e.preventDefault();
     // For now, let's use a hardcoded password.
     // You can move this to an Environment Variable later.
-    if (password === 'YourSecretPassword123') {
+    if (password === 'Sagereal39') {
       localStorage.setItem('isAdminAuthenticated', 'true');
       setAuth(true);
       navigate('/admin');
