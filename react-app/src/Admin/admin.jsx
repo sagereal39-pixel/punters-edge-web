@@ -327,6 +327,25 @@ function AdminPage() {
 
   return (
     <div className='admin-layout'>
+      <div className='admin-nav-header' style={{ marginBottom: '20px' }}>
+        <button
+          onClick={() => navigate('/')}
+          className='admin-secondary-btn'
+          style={{ marginRight: '10px' }}
+        >
+          🏠 Back to Home
+        </button>
+        <button
+          onClick={() => {
+            localStorage.removeItem('isAdminAuthenticated');
+            window.location.reload();
+          }}
+          className='admin-delete-btn'
+        >
+          Logout
+        </button>
+      </div>
+
       <div className='admin-list-card'>
         <h3 className='admin-panel-title'>
           📋 {showHistory ? 'TIPS HISTORY' : 'ACTIVE PREDICTIONS'}
