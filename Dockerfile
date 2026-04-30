@@ -5,7 +5,7 @@ FROM php:8.2-apache
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 
 # Copy your PHP files to the server's web directory
-COPY . /var/www/html/
+COPY *.php /var/www/html/
 
 # Expose port 80 for Render
 EXPOSE 80
