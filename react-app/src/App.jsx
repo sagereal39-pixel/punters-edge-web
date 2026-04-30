@@ -176,6 +176,17 @@ function App() {
 
             <Route path='/admin' element={<AdminPage />} />
             <Route path='/history' element={<HistoryPage />} />
+
+            <Route
+              path='/admin'
+              element={
+                isAuthenticated ? (
+                  <AdminPage />
+                ) : (
+                  <AdminLogin setAuth={setIsAuthenticated} />
+                )
+              }
+            />
           </Routes>
         </main>
 

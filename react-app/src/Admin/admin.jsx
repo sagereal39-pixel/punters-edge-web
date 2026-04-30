@@ -115,6 +115,22 @@ function AdminPage() {
     matchType: 'league',
   });
 
+  // Near the top of your AdminPage return statement:
+  <div className='admin-header-actions'>
+    <button onClick={() => navigate('/')} className='admin-secondary-btn'>
+      🏠 Back to Home
+    </button>
+    <button
+      onClick={() => {
+        localStorage.removeItem('isAdminAuthenticated');
+        window.location.reload();
+      }}
+      className='admin-delete-btn'
+    >
+      Logout
+    </button>
+  </div>;
+
   const historyMatches = existingMatches.filter((m) => m.status !== 'pending');
   const activeMatches = existingMatches.filter((m) => m.status === 'pending');
 
