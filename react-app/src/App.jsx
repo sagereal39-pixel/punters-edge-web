@@ -1,11 +1,19 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  Navigate,
+} from 'react-router-dom';
 import MatchList from './components/matchlist.jsx';
 import PredictionSidebar from './components/predictionsidebar.jsx';
 import DateNavigator from './components/datenavigator.jsx';
 import AdminPage from './Admin/admin.jsx';
 import HistoryPage from './Admin/historypage.jsx';
+// 1. ADD THIS IMPORT BELOW
+import AdminLogin from './Admin/adminlogin.jsx';
 
 const leagues = [
   'Bet of the Day',
@@ -35,6 +43,7 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
     localStorage.getItem('isAdminAuthenticated') === 'true',
   );
+
   const [matches, setMatches] = useState([]);
   const [fixtures, setFixtures] = useState([]);
   const [predictions, setPredictions] = useState([]);
@@ -50,19 +59,15 @@ function App() {
           `https://punters-edge-web.onrender.com/index.php?date=${selectedDate}`,
         );
         const data = await res.json();
-
         if (data.status === 'success') {
           setMatches(data.matches);
         } else {
-          console.error('API error:', data.message);
           setMatches([]);
         }
       } catch (error) {
-        console.error('Error fetching matches:', error);
         setMatches([]);
       }
     };
-
     fetchMatches();
   }, [selectedDate]);
 
@@ -75,11 +80,9 @@ function App() {
         const data = await res.json();
         setFixtures(data.status === 'success' ? data.matches : []);
       } catch (error) {
-        console.error('Error fetching fixtures:', error);
         setFixtures([]);
       }
     };
-
     fetchFixtures();
   }, [selectedDate]);
 
@@ -92,25 +95,18 @@ function App() {
         const data = await res.json();
         setPredictions(Array.isArray(data) ? data : []);
       } catch (error) {
-        console.error('Error fetching predictions:', error);
         setPredictions([]);
       }
     };
-
     fetchPredictions();
   }, []);
 
   const filteredMatches = predictions.filter((match) => {
-    // Use match_date if it exists, otherwise fall back to date
     const matchDateValue = match.match_date || match.date;
     const matchesDate = matchDateValue === selectedDate;
-
-    // Use league_category if it exists, otherwise fall back to leagueCategory
     const matchLeagueValue = match.league_category || match.leagueCategory;
     const matchesLeague =
       activeLeague === 'All' || matchLeagueValue === activeLeague;
-
-    // Ensure numeric check for is_bet_of_the_day
     const isBetOfDay =
       activeLeague === 'Bet of the Day' ? match.is_bet_of_the_day == 1 : true;
 
@@ -133,9 +129,12 @@ function App() {
             <Link to='/history' className='topnav-link'>
               History
             </Link>
-            <Link to='/admin' className='topnav-link admin-link'>
-              Admin
-            </Link>
+            {/* 2. ONLY SHOW ADMIN LINK IF LOGGED IN */}
+            {isAuthenticated && (
+              <Link to='/admin' className='topnav-link admin-link'>
+                Admin
+              </Link>
+            )}
           </nav>
         </header>
 
@@ -145,9 +144,7 @@ function App() {
               <button
                 key={league}
                 onClick={() => setActiveLeague(league)}
-                className={`league-btn ${
-                  activeLeague === league ? 'active' : ''
-                }`}
+                className={`league-btn ${activeLeague === league ? 'active' : ''}`}
               >
                 {league}
               </button>
@@ -163,12 +160,10 @@ function App() {
                     selectedDate={selectedDate}
                     setSelectedDate={setSelectedDate}
                   />
-
                   <div className='public-layout'>
                     <div className='public-main'>
                       <MatchList matches={filteredMatches} />
                     </div>
-
                     <div className='public-sidebar'>
                       <PredictionSidebar />
                     </div>
@@ -177,9 +172,7 @@ function App() {
               }
             />
 
-            <Route path='/admin' element={<AdminPage />} />
-            <Route path='/history' element={<HistoryPage />} />
-
+            {/* 3. CLEANED UP ADMIN ROUTE */}
             <Route
               path='/admin'
               element={
@@ -190,6 +183,11 @@ function App() {
                 )
               }
             />
+
+            <Route path='/history' element={<HistoryPage />} />
+
+            {/* Redirect any unknown routes to Home */}
+            <Route path='*' element={<Navigate to='/' />} />
           </Routes>
         </main>
 
