@@ -43,3 +43,5 @@ function AdminLogin({ setAuth }) {
     </div>
   );
 }
+
+export default AdminLogin;
