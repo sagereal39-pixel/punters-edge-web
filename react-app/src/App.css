@@ -1033,7 +1033,6 @@ textarea {
   width: 100%;
   z-index: 9999;
   overflow: hidden;
-  background-image: url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=2070');
 }
 
 /* This handles the background image separately */
@@ -1045,7 +1044,7 @@ textarea {
   width: 100%;
   height: 100%;
   /* Replace the URL below with your image */
-
+  background-image: url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=2070');
   background-size: cover;
   background-position: center;
   filter: brightness(40%) blur(2px); /* This handles the "upscale/opacity" feel */
