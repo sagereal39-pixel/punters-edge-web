@@ -127,11 +127,6 @@ function App() {
               History
             </Link>
             {/* 2. ONLY SHOW ADMIN LINK IF LOGGED IN */}
-            {isAuthenticated && (
-              <Link to='/admin' className='topnav-link admin-link'>
-                Admin
-              </Link>
-            )}
           </nav>
         </header>
 

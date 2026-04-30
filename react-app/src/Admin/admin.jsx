@@ -92,6 +92,11 @@ function AdminPage() {
     'Domestic Cups': 'Domestic Cups',
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('isAdminAuthenticated');
+    window.location.href = '/'; // Takes you back to the public site
+  };
+
   const normalizeLeague = (leagueName) => {
     return supportedLeagueMap[leagueName] || null;
   };
@@ -327,6 +332,19 @@ function AdminPage() {
 
   return (
     <div className='admin-layout'>
+      <div className='admin-dashboard-container'>
+        <header className='admin-internal-header'>
+          <button onClick={() => navigate('/')} className='back-home-link'>
+            🏠 View Site
+          </button>
+          <div className='admin-profile'>
+            <span>Logged in as: Sage</span>
+            <button onClick={handleLogout}>Logout</button>
+          </div>
+        </header>
+        {/* Rest of your admin panel */}
+      </div>
+
       <div className='admin-list-card'>
         <h3 className='admin-panel-title'>
           📋 {showHistory ? 'TIPS HISTORY' : 'ACTIVE PREDICTIONS'}
