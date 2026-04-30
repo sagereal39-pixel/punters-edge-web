@@ -119,120 +119,118 @@ function App() {
   });
 
   return (
-    <Router>
-      <div className='app-shell'>
-        {/* ONLY show the topbar if NOT on admin path */}
-        {!isAdminPath && (
-          <header className='topbar'>
-            <Link to='/' className='brand-link'>
-              <div className='brand'>⚽ PUNTER'S EDGE</div>
-            </Link>
-            <nav className='topnav'>
-              <Link to='/' className='topnav-link'>
-                Home
-              </Link>
-              <Link to='/history' className='topnav-link'>
-                History
-              </Link>
-            </nav>
-          </header>
-        )}
+    <div className='app-shell'>
+      {/* ONLY show the topbar if NOT on admin path */}
+      {!isAdminPath && (
         <header className='topbar'>
           <Link to='/' className='brand-link'>
-            <div className='brand'>⚽ PUNTER&apos;S EDGE</div>
+            <div className='brand'>⚽ PUNTER'S EDGE</div>
           </Link>
-
           <nav className='topnav'>
+            <Link to='/' className='topnav-link'>
+              Home
+            </Link>
             <Link to='/history' className='topnav-link'>
               History
             </Link>
-            {/* 2. ONLY SHOW ADMIN LINK IF LOGGED IN */}
           </nav>
         </header>
+      )}
+      <header className='topbar'>
+        <Link to='/' className='brand-link'>
+          <div className='brand'>⚽ PUNTER&apos;S EDGE</div>
+        </Link>
 
-        <main className='page-container'>
-          {/* ONLY show league scroll if NOT on admin path */}
-          {!isAdminPath && (
-            <div className='league-scroll'>
-              {leagues.map((league) => (
-                <button
-                  key={league}
-                  onClick={() => setActiveLeague(league)}
-                  className='league-btn'
-                >
-                  {league}
-                </button>
-              ))}
-            </div>
-          )}
+        <nav className='topnav'>
+          <Link to='/history' className='topnav-link'>
+            History
+          </Link>
+          {/* 2. ONLY SHOW ADMIN LINK IF LOGGED IN */}
+        </nav>
+      </header>
+
+      <main className='page-container'>
+        {/* ONLY show league scroll if NOT on admin path */}
+        {!isAdminPath && (
           <div className='league-scroll'>
             {leagues.map((league) => (
               <button
                 key={league}
                 onClick={() => setActiveLeague(league)}
-                className={`league-btn ${activeLeague === league ? 'active' : ''}`}
+                className='league-btn'
               >
                 {league}
               </button>
             ))}
           </div>
+        )}
+        <div className='league-scroll'>
+          {leagues.map((league) => (
+            <button
+              key={league}
+              onClick={() => setActiveLeague(league)}
+              className={`league-btn ${activeLeague === league ? 'active' : ''}`}
+            >
+              {league}
+            </button>
+          ))}
+        </div>
 
-          <Routes>
-            <Route
-              path='/'
-              element={
-                <>
-                  <DateNavigator
-                    selectedDate={selectedDate}
-                    setSelectedDate={setSelectedDate}
-                  />
-                  <div className='public-layout'>
-                    <div className='public-main'>
-                      <MatchList matches={filteredMatches} />
-                    </div>
-                    <div className='public-sidebar'>
-                      <PredictionSidebar />
-                    </div>
+        <Routes>
+          <Route
+            path='/'
+            element={
+              <>
+                <DateNavigator
+                  selectedDate={selectedDate}
+                  setSelectedDate={setSelectedDate}
+                />
+                <div className='public-layout'>
+                  <div className='public-main'>
+                    <MatchList matches={filteredMatches} />
                   </div>
-                </>
-              }
-            />
+                  <div className='public-sidebar'>
+                    <PredictionSidebar />
+                  </div>
+                </div>
+              </>
+            }
+          />
 
-            <Route
-              path='/admin'
-              element={
-                isAuthenticated ? (
-                  <AdminPage />
-                ) : (
-                  <AdminLogin setAuth={setIsAuthenticated} />
-                )
-              }
-            />
+          <Route
+            path='/admin'
+            element={
+              isAuthenticated ? (
+                <AdminPage />
+              ) : (
+                <AdminLogin setAuth={setIsAuthenticated} />
+              )
+            }
+          />
 
-            {/* 3. CLEANED UP ADMIN ROUTE */}
-            <Route
-              path='/admin'
-              element={
-                isAuthenticated ? (
-                  <AdminPage />
-                ) : (
-                  <AdminLogin setAuth={setIsAuthenticated} />
-                )
-              }
-            />
+          {/* 3. CLEANED UP ADMIN ROUTE */}
+          <Route
+            path='/admin'
+            element={
+              isAuthenticated ? (
+                <AdminPage />
+              ) : (
+                <AdminLogin setAuth={setIsAuthenticated} />
+              )
+            }
+          />
 
-            <Route path='/history' element={<HistoryPage />} />
+          <Route path='/history' element={<HistoryPage />} />
 
-            {/* Redirect any unknown routes to Home */}
-            <Route path='*' element={<Navigate to='/' />} />
-          </Routes>
-        </main>
+          {/* Redirect any unknown routes to Home */}
+          <Route path='*' element={<Navigate to='/' />} />
+        </Routes>
+      </main>
 
-        <footer className='footer'>
-          <p>© 2026 Punter&apos;s Edge Predictions. All rights reserved.</p>
-        </footer>
-      </div>
-    </Router>
+      <footer className='footer'>
+        <p>© 2026 Punter&apos;s Edge Predictions. All rights reserved.</p>
+      </footer>
+    </div>
   );
 }
 
