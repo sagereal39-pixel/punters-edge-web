@@ -11,15 +11,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
   exit;
 }
 
-$host = getenv('DB_HOST') ?: "127.0.0.1";
-$port = getenv('DB_PORT') ?: 3307;
+$host = getenv('DB_HOST') ?: "mysql.railway.internal";
+$port = getenv('DB_PORT') ?: 3306;
 $user = getenv('DB_USER') ?: "root";
-$pass = getenv('DB_PASS') ?: ""; // Live servers will provide this via ENV
+$pass = getenv('DB_PASS') ?: "vCOWKZXXPuKeTFEcFtTHEkSsXrxtLHVs"; // Live servers will provide this via ENV
 $dbname = getenv('DB_NAME') ?: "railway";
-$conn = new mysqli($host, $user, $pass, $dbname, $port);
+// $conn = new mysqli($host, $user, $pass, $dbname, $port);
 
-if ($conn->connect_error) {
-  echo json_encode(["status" => "error", "message" => "DB Connection Failed"]);
+// Connect with a timeout to prevent 502 hangs
+mysqli_report(MYSQLI_REPORT_STRICT);
+try {
+  $conn = new mysqli($host, $user, $pass, $dbname, $port);
+} catch (Exception $e) {
+  echo json_encode(["status" => "error", "message" => "Connection failed: " . $e->getMessage()]);
   exit;
 }
 

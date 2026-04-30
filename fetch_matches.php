@@ -8,16 +8,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
   exit;
 }
 
-$host = "127.0.0.1";
-$port = 3307;
-$user = "root";
-$pass = "";
-$dbname = "predictions";
+$host = getenv('DB_HOST') ?: "mysql.railway.internal";
+$port = getenv('DB_PORT') ?: 3306;
+$user = getenv('DB_USER') ?: "root";
+$pass = getenv('DB_PASS') ?: "vCOWKZXXPuKeTFEcFtTHEkSsXrxtLHVs"; // Live servers will provide this via ENV
+$dbname = getenv('DB_NAME') ?: "railway";
+// $conn = new mysqli($host, $user, $pass, $dbname, $port);
 
-$conn = new mysqli($host, $user, $pass, $dbname, $port);
-
-if ($conn->connect_error) {
-  echo json_encode(["error" => "Connection failed: " . $conn->connect_error]);
+// Connect with a timeout to prevent 502 hangs
+mysqli_report(MYSQLI_REPORT_STRICT);
+try {
+  $conn = new mysqli($host, $user, $pass, $dbname, $port);
+} catch (Exception $e) {
+  echo json_encode(["status" => "error", "message" => "Connection failed: " . $e->getMessage()]);
   exit;
 }
 
