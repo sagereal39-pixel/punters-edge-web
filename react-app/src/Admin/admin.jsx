@@ -331,270 +331,271 @@ function AdminPage() {
   };
 
   return (
-    <div className='admin-layout'>
-      <div className='admin-dashboard-container'>
-        <header className='admin-internal-header'>
-          <button onClick={() => navigate('/')} className='back-home-link'>
-            🏠 View Site
+    <div className='admin-page-root'>
+      {/* 1. INDEPENDENT DASHBOARD HEADER */}
+      <header className='admin-dashboard-header'>
+        <div className='admin-header-left'>
+          <h2 className='admin-brand'>
+            ⚽ PUNTER'S EDGE <span className='admin-badge'>ADMIN</span>
+          </h2>
+          <button onClick={() => navigate('/')} className='admin-view-site-btn'>
+            🏠 View Live Site
           </button>
-          <div className='admin-profile'>
-            <span>Logged in as: Sage</span>
-            <button onClick={handleLogout}>Logout</button>
+        </div>
+
+        <div className='admin-profile-zone'>
+          <div className='admin-user-info'>
+            <span className='admin-user-name'>
+              Logged in as: <strong>Sage</strong>
+            </span>
+            <button onClick={handleLogout} className='admin-logout-btn'>
+              Logout
+            </button>
           </div>
-        </header>
-        {/* Rest of your admin panel */}
-      </div>
+        </div>
+      </header>
 
-      <div className='admin-list-card'>
-        <h3 className='admin-panel-title'>
-          📋 {showHistory ? 'TIPS HISTORY' : 'ACTIVE PREDICTIONS'}
-        </h3>
+      <div className='admin-main-content'>
+        {/* 2. LEFT COLUMN: PREDICTION FORM */}
+        <section className='admin-form-section'>
+          <div className='admin-form-wrap'>
+            <h2 className='admin-form-title'>
+              {editingId ? '✏️ EDIT PREDICTION' : '🛡️ ADMIN: ADD PREDICTION'}
+            </h2>
 
-        <button
-          onClick={() => setShowHistory(!showHistory)}
-          className='admin-toggle-btn'
-        >
-          {showHistory ? '⬅ BACK TO ACTIVE' : 'VIEW FULL HISTORY'}
-        </button>
-
-        <button
-          onClick={() => navigate('/history')}
-          className='admin-secondary-btn'
-        >
-          VIEW FULL HISTORY
-        </button>
-
-        <div className='admin-cards-list'>
-          {(showHistory ? historyMatches : activeMatches).map((m) => (
-            <div
-              key={m.id}
-              className={`admin-match-card ${
-                editingId === m.id ? 'editing' : ''
-              }`}
-            >
-              <div className='admin-match-title'>
-                {m.home} vs {m.away}
-              </div>
-
-              <div className='admin-match-meta'>
-                {m.date} | {m.leagueCategory}
-              </div>
-
-              <div className='admin-card-actions'>
-                {showHistory && (
-                  <span
-                    className={`admin-status-badge ${
-                      m.status === 'won' ? 'won' : 'lost'
-                    }`}
+            <div className='panel-card admin-api-panel'>
+              <p className='admin-helper-text'>Quick-Fill from Sports API:</p>
+              <div className='admin-quickfill-row'>
+                <button
+                  onClick={fetchRealMatches}
+                  disabled={loading}
+                  className='admin-search-btn'
+                  type='button'
+                >
+                  {loading ? 'Searching...' : '🔍 SEARCH GAMES'}
+                </button>
+                {apiMatches.length > 0 && (
+                  <select
+                    onChange={handleMatchSelect}
+                    className='admin-input full-width'
                   >
-                    {m.status.toUpperCase()}
-                  </span>
+                    <option value=''>-- Select a Live Match --</option>
+                    {apiMatches.map((m) => (
+                      <option key={m.id} value={m.id}>
+                        {m.home} vs {m.away}{' '}
+                        {m.leagueCategory ? ` (${m.leagueCategory})` : ''}
+                      </option>
+                    ))}
+                  </select>
                 )}
+              </div>
 
-                <button
-                  onClick={() => handleEdit(m)}
-                  className='admin-edit-btn'
-                >
-                  Edit
-                </button>
-
-                <button
-                  onClick={() => handleDelete(m.id)}
-                  className='admin-delete-btn'
-                >
-                  Delete
-                </button>
+              <div className='api-debug-card'>
+                <div>
+                  <strong className='api-debug-title'>API Debug:</strong>
+                </div>
+                <div>Date: {formData.date}</div>
+                <div>Matches returned: {apiMeta.count}</div>
+                {apiMeta.message && (
+                  <div className='api-debug-message'>{apiMeta.message}</div>
+                )}
               </div>
             </div>
-          ))}
-        </div>
-      </div>
-      <div className='admin-form-wrap'>
-        <h2 className='admin-form-title'>
-          {editingId ? '✏️ EDIT PREDICTION' : '🛡️ ADMIN: ADD PREDICTION'}
-        </h2>
 
-        <div className='panel-card admin-api-panel'>
-          <p className='admin-helper-text'>Quick-Fill from Sports API:</p>
+            <form onSubmit={handleSubmit} className='admin-form-card'>
+              <label className='form-label'>Match Date</label>
+              <input
+                type='date'
+                value={formData.date}
+                className='admin-input'
+                onChange={(e) =>
+                  setFormData({ ...formData, date: e.target.value })
+                }
+              />
 
-          <div className='admin-quickfill-row'>
-            <button
-              onClick={fetchRealMatches}
-              disabled={loading}
-              className='admin-search-btn'
-              type='button'
-            >
-              {loading ? 'Searching...' : '🔍 SEARCH GAMES'}
-            </button>
+              <div className='admin-form-grid-2'>
+                <div>
+                  <label className='form-label'>Home Team</label>
+                  <input
+                    required
+                    value={formData.home}
+                    className='admin-input'
+                    onChange={(e) =>
+                      setFormData({ ...formData, home: e.target.value })
+                    }
+                  />
+                </div>
+                <div>
+                  <label className='form-label'>Away Team</label>
+                  <input
+                    required
+                    value={formData.away}
+                    className='admin-input'
+                    onChange={(e) =>
+                      setFormData({ ...formData, away: e.target.value })
+                    }
+                  />
+                </div>
+              </div>
 
-            {apiMatches.length > 0 && (
+              <label className='form-label'>League Category</label>
               <select
-                onChange={handleMatchSelect}
-                className='admin-input full-width'
+                className='admin-input'
+                value={formData.leagueCategory}
+                onChange={(e) =>
+                  setFormData({ ...formData, leagueCategory: e.target.value })
+                }
               >
-                <option value=''>-- Select a Live Match --</option>
-                {apiMatches.map((m) => (
-                  <option key={m.id} value={m.id}>
+                <option>Premier League</option>
+                <option>Ligue 1</option>
+                <option>LaLiga</option>
+                <option>Bundesliga</option>
+                <option>Serie A</option>
+                <option>UCL</option>
+                <option>Europa League</option>
+                <option>UECL</option>
+                <option>Eredivisie</option>
+                <option>Liga Portugal</option>
+                <option>Pro League</option>
+                <option>Scottish Premiership</option>
+                <option>Super Lig</option>
+                <option>Domestic Cups</option>
+                <option>International Matches</option>
+              </select>
+
+              <label className='form-label'>Your Prediction</label>
+              <input
+                placeholder='e.g. Over 2.5'
+                className='admin-input'
+                value={formData.prediction}
+                onChange={(e) =>
+                  setFormData({ ...formData, prediction: e.target.value })
+                }
+              />
+
+              <div className='admin-options-row'>
+                <label className='admin-checkbox-label'>
+                  <input
+                    type='checkbox'
+                    checked={formData.isBetOfTheDay}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        isBetOfTheDay: e.target.checked,
+                      })
+                    }
+                  />{' '}
+                  ⭐ Bet of Day
+                </label>
+                <div className='admin-risk-wrap'>
+                  <label className='admin-risk-label'>Risk Level:</label>
+                  <select
+                    value={formData.risk}
+                    onChange={(e) =>
+                      setFormData({ ...formData, risk: e.target.value })
+                    }
+                    className='admin-risk-select'
+                  >
+                    <option>Safe</option>
+                    <option>Medium</option>
+                    <option>Risky</option>
+                  </select>
+                </div>
+              </div>
+
+              <label className='form-label'>Match Status</label>
+              <select
+                className='admin-input'
+                value={formData.status}
+                onChange={(e) =>
+                  setFormData({ ...formData, status: e.target.value })
+                }
+              >
+                <option value='pending'>Pending ⏳</option>
+                <option value='won'>Won ✅</option>
+                <option value='lost'>Lost ❌</option>
+              </select>
+
+              <button
+                type='submit'
+                className={`admin-submit-btn ${editingId ? 'editing' : ''}`}
+              >
+                {editingId ? 'UPDATE PREDICTION' : 'POST PREDICTION'}
+              </button>
+              {editingId && (
+                <button
+                  type='button'
+                  onClick={() => {
+                    setEditingId(null);
+                    setFormData({
+                      ...formData,
+                      home: '',
+                      away: '',
+                      prediction: '',
+                    });
+                  }}
+                  className='admin-cancel-btn'
+                >
+                  Cancel Edit
+                </button>
+              )}
+            </form>
+          </div>
+        </section>
+
+        {/* 3. RIGHT COLUMN: PREDICTIONS LIST */}
+        <section className='admin-list-section'>
+          <div className='admin-list-card'>
+            <div className='list-header-row'>
+              <h3 className='admin-panel-title'>
+                📋 {showHistory ? 'TIPS HISTORY' : 'ACTIVE PREDICTIONS'}
+              </h3>
+              <button
+                onClick={() => setShowHistory(!showHistory)}
+                className='admin-toggle-btn'
+              >
+                {showHistory ? '⬅ BACK TO ACTIVE' : 'VIEW FULL HISTORY'}
+              </button>
+            </div>
+
+            <div className='admin-cards-list'>
+              {(showHistory ? historyMatches : activeMatches).map((m) => (
+                <div
+                  key={m.id}
+                  className={`admin-match-card ${editingId === m.id ? 'editing' : ''}`}
+                >
+                  <div className='admin-match-title'>
                     {m.home} vs {m.away}
-                    {m.leagueCategory ? ` (${m.leagueCategory})` : ''}
-                  </option>
-                ))}
-              </select>
-            )}
-          </div>
-
-          <div className='api-debug-card'>
-            <div>
-              <strong className='api-debug-title'>API Debug:</strong>
-            </div>
-            <div>Date: {formData.date}</div>
-            <div>Matches returned: {apiMeta.count}</div>
-            <div>
-              Leagues returned:{' '}
-              {apiMeta.leagues.length > 0 ? apiMeta.leagues.join(', ') : 'None'}
-            </div>
-            {apiMeta.message && (
-              <div className='api-debug-message'>{apiMeta.message}</div>
-            )}
-          </div>
-        </div>
-
-        <form onSubmit={handleSubmit} className='admin-form-card'>
-          <label className='form-label'>Match Date</label>
-          <input
-            type='date'
-            value={formData.date}
-            className='admin-input'
-            onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-          />
-
-          <div className='admin-form-grid-2'>
-            <div>
-              <label className='form-label'>Home Team</label>
-              <input
-                required
-                value={formData.home}
-                className='admin-input'
-                onChange={(e) =>
-                  setFormData({ ...formData, home: e.target.value })
-                }
-              />
-            </div>
-
-            <div>
-              <label className='form-label'>Away Team</label>
-              <input
-                required
-                value={formData.away}
-                className='admin-input'
-                onChange={(e) =>
-                  setFormData({ ...formData, away: e.target.value })
-                }
-              />
+                  </div>
+                  <div className='admin-match-meta'>
+                    {m.date} | {m.leagueCategory}
+                  </div>
+                  <div className='admin-card-actions'>
+                    {showHistory && (
+                      <span
+                        className={`admin-status-badge ${m.status === 'won' ? 'won' : 'lost'}`}
+                      >
+                        {m.status.toUpperCase()}
+                      </span>
+                    )}
+                    <button
+                      onClick={() => handleEdit(m)}
+                      className='admin-edit-btn'
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(m.id)}
+                      className='admin-delete-btn'
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-
-          <label className='form-label'>League Category</label>
-          <select
-            className='admin-input'
-            value={formData.leagueCategory}
-            onChange={(e) =>
-              setFormData({ ...formData, leagueCategory: e.target.value })
-            }
-          >
-            <option>Premier League</option>
-            <option>Ligue 1</option>
-            <option>LaLiga</option>
-            <option>Bundesliga</option>
-            <option>Serie A</option>
-            <option>UCL</option>
-            <option>Europa League</option>
-            <option>UECL</option>
-            <option>Eredivisie</option>
-            <option>Liga Portugal</option>
-            <option>Pro League</option>
-            <option>Scottish Premiership</option>
-            <option>Super Lig</option>
-            <option>Domestic Cups</option>
-            <option>International Matches</option>
-          </select>
-
-          <label className='form-label'>Your Prediction</label>
-          <input
-            placeholder='e.g. Over 2.5'
-            className='admin-input'
-            value={formData.prediction}
-            onChange={(e) =>
-              setFormData({ ...formData, prediction: e.target.value })
-            }
-          />
-
-          <div className='admin-options-row'>
-            <label className='admin-checkbox-label'>
-              <input
-                type='checkbox'
-                checked={formData.isBetOfTheDay}
-                onChange={(e) =>
-                  setFormData({ ...formData, isBetOfTheDay: e.target.checked })
-                }
-              />{' '}
-              ⭐ Bet of Day
-            </label>
-
-            <div className='admin-risk-wrap'>
-              <label className='admin-risk-label'>Risk Level:</label>
-              <select
-                value={formData.risk}
-                onChange={(e) =>
-                  setFormData({ ...formData, risk: e.target.value })
-                }
-                className='admin-risk-select'
-              >
-                <option>Safe</option>
-                <option>Medium</option>
-                <option>Risky</option>
-              </select>
-            </div>
-          </div>
-
-          <label className='form-label'>Match Status</label>
-          <select
-            className='admin-input'
-            value={formData.status}
-            onChange={(e) =>
-              setFormData({ ...formData, status: e.target.value })
-            }
-          >
-            <option value='pending'>Pending ⏳</option>
-            <option value='won'>Won ✅</option>
-            <option value='lost'>Lost ❌</option>
-          </select>
-
-          <button
-            type='submit'
-            className={`admin-submit-btn ${editingId ? 'editing' : ''}`}
-          >
-            {editingId ? 'UPDATE PREDICTION' : 'POST PREDICTION'}
-          </button>
-
-          {editingId && (
-            <button
-              type='button'
-              onClick={() => {
-                setEditingId(null);
-                setFormData({
-                  ...formData,
-                  home: '',
-                  away: '',
-                  prediction: '',
-                });
-              }}
-              className='admin-cancel-btn'
-            >
-              Cancel Edit
-            </button>
-          )}
-        </form>
+        </section>
       </div>
     </div>
   );

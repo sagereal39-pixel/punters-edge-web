@@ -977,3 +977,46 @@ textarea {
     font-size: 0.8rem;
   }
 }
+
+.admin-page-root {
+  background-color: #0f0f0f;
+  min-height: 100vh;
+  color: white;
+  padding-bottom: 50px;
+}
+.admin-dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: #1a1a1a;
+  border-bottom: 2px solid #00ff88;
+  margin-bottom: 30px;
+}
+.admin-badge {
+  background: #00ff88;
+  color: black;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  vertical-align: middle;
+}
+.admin-main-content {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 40px;
+  padding: 0 30px;
+}
+.list-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Responsive for mobile */
+@media (max-width: 1000px) {
+  .admin-main-content {
+    grid-template-columns: 1fr;
+  }
+}
