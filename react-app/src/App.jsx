@@ -164,17 +164,6 @@ function App() {
             ))}
           </div>
         )}
-        {/* <div className='league-scroll'>
-          {leagues.map((league) => (
-            <button
-              key={league}
-              onClick={() => setActiveLeague(league)}
-              className={`league-btn ${activeLeague === league ? 'active' : ''}`}
-            >
-              {league}
-            </button>
-          ))}
-        </div> */}
 
         <Routes>
           <Route
