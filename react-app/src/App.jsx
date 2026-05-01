@@ -46,7 +46,7 @@ function App() {
   );
 
   const location = useLocation();
-  const isAdminPath = location.pathname === '/admin';
+  const isAdminPath = location.pathname.startsWith('/admin'); // Catch all admin-related URLs
 
   const [matches, setMatches] = useState([]);
   const [fixtures, setFixtures] = useState([]);
@@ -120,7 +120,7 @@ function App() {
 
   return (
     <div className='app-shell'>
-      {/* ONLY show the topbar if NOT on admin path */}
+      {/* This ensures NO public nav ever shows on admin pages */}
       {!isAdminPath && (
         <header className='topbar'>
           <Link to='/' className='brand-link'>

@@ -1092,3 +1092,32 @@ textarea {
   border-radius: 6px;
   cursor: pointer;
 }
+
+/* Styling for both Admin View Site and Logout buttons */
+.admin-view-site-btn,
+.admin-logout-btn {
+  background-color: #00ff88; /* Neon Green */
+  color: #000; /* Black text for contrast */
+  border: 1px solid #333;
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-weight: bold;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.5s ease; /* Smooth 0.5s transition */
+  text-transform: uppercase;
+}
+
+/* Hover effect: Transition to a darker shade */
+.admin-view-site-btn:hover,
+.admin-logout-btn:hover {
+  background-color: #009955; /* Darker green */
+}
+
+/* Specific spacing for the admin header */
+.admin-header-left,
+.admin-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

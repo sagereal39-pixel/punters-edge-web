@@ -335,9 +335,7 @@ function AdminPage() {
       {/* 1. INDEPENDENT DASHBOARD HEADER */}
       <header className='admin-dashboard-header'>
         <div className='admin-header-left'>
-          <h2 className='admin-brand'>
-            ⚽ PUNTER'S EDGE <span className='admin-badge'>ADMIN</span>
-          </h2>
+          <h2 className='admin-brand'>⚽ PUNTER'S EDGE</h2>
           <button onClick={() => navigate('/')} className='admin-view-site-btn'>
             🏠 View Live Site
           </button>
@@ -345,9 +343,6 @@ function AdminPage() {
 
         <div className='admin-profile-zone'>
           <div className='admin-user-info'>
-            <span className='admin-user-name'>
-              Logged in as: <strong>Sage</strong>
-            </span>
             <button onClick={handleLogout} className='admin-logout-btn'>
               Logout
             </button>
