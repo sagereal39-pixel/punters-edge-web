@@ -1121,3 +1121,21 @@ textarea {
   align-items: center;
   gap: 10px;
 }
+
+.risk-level-row {
+  display: flex;
+  align-items: center; /* Vertically aligns text and badge */
+  gap: 8px; /* Puts space between 'Risk Level:' and the badge */
+  margin-top: 4px; /* Space below the team names */
+}
+
+.risk-label {
+  font-size: 14px; /* Adjust based on your preference */
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Ensure the badge doesn't have a margin-top that ruins the alignment */
+.risk-badge {
+  margin: 0;
+}

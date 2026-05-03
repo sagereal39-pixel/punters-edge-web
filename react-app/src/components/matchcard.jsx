@@ -32,13 +32,14 @@ function MatchCard({ match }) {
             {match.home} vs {match.away}
           </strong>
 
-          {/* Risk */}
+          {/* Risk Section */}
           {match.risk && (
-            <span className={`risk-badge ${getRiskColor(match.risk)}`}>
-              {' '}
-              <p>Risk Level:</p>
-              {match.risk}
-            </span>
+            <div className='risk-level-row'>
+              <span className='risk-label'>Risk Level:</span>
+              <span className={`risk-badge ${getRiskColor(match.risk)}`}>
+                {match.risk}
+              </span>
+            </div>
           )}
           {/* League */}
           <div className='league'>{match.league_category || match.league}</div>
