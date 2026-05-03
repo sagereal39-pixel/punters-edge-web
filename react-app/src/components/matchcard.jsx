@@ -35,6 +35,7 @@ function MatchCard({ match }) {
           {/* Risk */}
           {match.risk && (
             <span className={`risk-badge ${getRiskColor(match.risk)}`}>
+              Risk Level
               {match.risk}
             </span>
           )}
