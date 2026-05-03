@@ -1124,18 +1124,23 @@ textarea {
 
 .risk-level-row {
   display: flex;
-  align-items: center; /* Vertically aligns text and badge */
-  gap: 8px; /* Puts space between 'Risk Level:' and the badge */
-  margin-top: 4px; /* Space below the team names */
+  align-items: center;
+  gap: 10px; /* This creates the space between text and badge */
+  margin: 5px 0;
 }
 
 .risk-label {
-  font-size: 14px; /* Adjust based on your preference */
-  font-weight: bold;
-  color: #fff;
+  color: #ffffff; /* Plain white text */
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
 }
 
-/* Ensure the badge doesn't have a margin-top that ruins the alignment */
+/* Ensure the badge ONLY styles the SAFE/MEDIUM/HIGH text */
 .risk-badge {
-  margin: 0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 12px;
+  color: #000; /* Keep text inside badge dark for contrast */
 }
