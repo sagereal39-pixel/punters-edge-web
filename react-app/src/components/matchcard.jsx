@@ -31,14 +31,13 @@ function MatchCard({ match }) {
             {match.matchType === 'cup' && '🏆 '}
             {match.home} vs {match.away}
           </strong>
-
+          Risk Level:
           {/* Risk */}
           {match.risk && (
             <span className={`risk-badge ${getRiskColor(match.risk)}`}>
-              Risk Level: {match.risk}
+              {match.risk}
             </span>
           )}
-
           {/* League */}
           <div className='league'>{match.league_category || match.league}</div>
         </div>
